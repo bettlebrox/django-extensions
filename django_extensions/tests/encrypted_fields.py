@@ -17,7 +17,7 @@ except ImportError:
     keyczar_active = False
 
 
-class EncryptedFieldsTestCase(FieldTestCase):
+class EncryptedFieldsTestCase(tests.FieldTestCase):
 
     def __init__(self, *args, **kwargs):
         if keyczar_active:
