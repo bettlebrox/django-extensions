@@ -17,25 +17,12 @@ except ImportError:
     keyczar_active = False
 
 
-class EncryptedFieldsTestCase(unittest.TestCase):
+class EncryptedFieldsTestCase(FieldTestCase):
 
     def __init__(self, *args, **kwargs):
         if keyczar_active:
             self.crypt = keyczar.Crypter.Read(settings.ENCRYPTED_FIELD_KEYS_DIR)
         super(EncryptedFieldsTestCase, self).__init__(*args, **kwargs)
-
-    def setUp(self):
-        self.old_installed_apps = settings.INSTALLED_APPS
-        settings.INSTALLED_APPS.append('django_extensions.tests')
-        loading.cache.loaded = False
-        migrate = True
-        for app in settings.INSTALLED_APPS:
-            if app == "south":
-                migrate = False
-        call_command('syncdb', verbosity=0, migrate=migrate)
-
-    def tearDown(self):
-        settings.INSTALLED_APPS = self.old_installed_apps
 
     def testCharFieldCreate(self):
         if not keyczar_active:
