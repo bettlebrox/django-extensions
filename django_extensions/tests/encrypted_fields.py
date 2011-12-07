@@ -1,10 +1,8 @@
 import unittest
-
+from field import FieldTestCase
 
 from django.db import connection
 from django.conf import settings
-from django.core.management import call_command
-from django.db.models import loading
 
 # Only perform encrypted fields tests if keyczar is present
 # Resolves http://github.com/django-extensions/django-extensions/issues/#issue/17
@@ -17,7 +15,7 @@ except ImportError:
     keyczar_active = False
 
 
-class EncryptedFieldsTestCase(tests.FieldTestCase):
+class EncryptedFieldsTestCase(FieldTestCase):
 
     def __init__(self, *args, **kwargs):
         if keyczar_active:

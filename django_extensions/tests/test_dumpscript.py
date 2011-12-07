@@ -1,11 +1,13 @@
 import sys
+from field import FieldTestCase
 from StringIO import StringIO
 from django.test import TestCase
 from django.core.management import call_command
 from django_extensions.tests.models import Name
 
-class DumpScriptTests(TestCase):
+class DumpScriptTests(FieldTestCase):
     def setUp(self):
+        super(DumpScriptTests, self).setUp()
         self.real_stdout = sys.stdout
         sys.stdout = StringIO()
 

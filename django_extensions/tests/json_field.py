@@ -1,5 +1,5 @@
 import unittest
-
+from field import FieldTestCase
 
 from django.db import connection
 from django.conf import settings
@@ -13,16 +13,7 @@ class TestModel(models.Model):
     a = models.IntegerField()
     j_field = JSONField()
 
-class JsonFieldTest(unittest.TestCase):
-
-    def setUp(self):
-        self.old_installed_apps = settings.INSTALLED_APPS
-        settings.INSTALLED_APPS.append('django_extensions.tests')
-        loading.cache.loaded = False
-        call_command('syncdb', verbosity=0)
-
-    def tearDown(self):
-        settings.INSTALLED_APPS = self.old_installed_apps
+class JsonFieldTest(FieldTestCase):
 
     def testCharFieldCreate(self):
 

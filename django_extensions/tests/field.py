@@ -1,5 +1,7 @@
 import unittest
 from django.conf import settings
+from django.db.models import loading
+from django.core.management import call_command
 
 
 """
